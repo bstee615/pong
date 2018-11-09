@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Atari';
+    src: url('Commodore Angled v1.2.ttf');
+}
+
+@keyframes shake-animation {
+    0% {
+        transform: rotate(3deg);
+    }
+    20% {
+        transform: rotate(-5deg);
+    }
+    40% {
+        transform: rotate(9deg);
+    }
+    60% {
+        transform: rotate(4deg);
+    }
+    80% {
+        transform: rotate(8deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.shake {
+    animation-name: shake-animation;
+    animation-duration: 1s;
+}
+
+.canvasContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body, #pongCanvas {
+    background-color: black;
+}
+
+.player {
+    position: fixed;
+    top: 50%;
+    color: white;
+    margin-top: -100px;
+}
+
+.player img {
+    width: 200px;
+    height: 200px;
+}
+
+.human {
+    left: 2%;
+}
+
+.cpu {
+    margin-top: -100px;
+    margin-left: -200px;
+    left: 98%;
+}
+
+.options {
+    position: fixed;
+    top: 98%;
+    left: 98%;
+    transform: translate(-100%, -100%);
+}
+
+.options p {
+    width: 200px;
+    font-family: 'Atari';
+    font-size: 20px;
+    color: white;
+}
