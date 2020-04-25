@@ -29,6 +29,9 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    min-width: 620px;
+    min-height: 460px;
 }
 
 body {
