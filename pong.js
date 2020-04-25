@@ -141,10 +141,21 @@ $(document).keyup(function (ev) {
     }
 });
 
+function randomG(v){ 
+    let r = 0;
+    for(let i = v; i > 0; i --){
+        r += Math.random();
+    }
+    return r / v;
+}
+
 function resetBall() {
     ball.x = ballStart.x;
     ball.y = ballStart.y;
-    ball.delta.y = (ball.delta.y / Math.abs(ball.delta.y)) * ballSpeed/2;
+    // const signRand = Math.random() - .5;
+    // const sign = signRand / Math.abs(signRand);
+    const magnitude = (randomG(5) - .5) * 10;
+    ball.delta.y = magnitude;
 
     if (sound) {
         sounds.point.play();
