@@ -154,10 +154,10 @@ function resetBall() {
 // Ball position logic
 function ballIsInsidePaddle(side) {
     if (side == 'left') {
-        return ball.y < player1.y + player1.h && ball.y + ball.r > player1.y;
+        return ball.y < player1.y + player1.h && ball.y + ball.r > player1.y && ball.x < player1.x + player1.w && ball.x > bounds.left;
     }
     if (side == 'right') {
-        return ball.y < player2.y + player2.h && ball.y + ball.r > player2.y;
+        return ball.y < player2.y + player2.h && ball.y + ball.r > player2.y && ball.x + ball.r > player2.x && ball.x < bounds.right;
     }
 }
 
