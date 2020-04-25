@@ -30,12 +30,12 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    min-width: 620px;
-    min-height: 460px;
 }
 
 body {
     background-color: black;
+    min-width: 620px;
+    min-height: 460px;
 }
 
 .container {
