@@ -34,8 +34,6 @@ html, body {
 
 body {
     background-color: black;
-    min-width: 620px;
-    min-height: 460px;
 }
 
 .container {
@@ -58,8 +56,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    min-width: 620px;
-    min-height: 465px;
 }
 
 .canvasContainer {

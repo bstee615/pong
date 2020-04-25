@@ -48,7 +48,7 @@ function resetCanvasWidth() {
         x: canvas.width / 2 - ballRadius / 2,
         y: canvas.height / 2 - ballRadius / 2
     };
-    ballSpeed = 10
+    ballSpeed = canvas.width / 60;
     paddleSpeed = ballSpeed * .65;
     
     ctx = canvas.getContext("2d");
