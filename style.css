@@ -24,67 +24,74 @@
     }
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    
+    overflow: hidden;
+}
+
+.allContainer {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+    margin: 0;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-width: 620px;
+    min-height: 465px;
+}
+
+.canvasContainer {
+    flex: 1 0;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    min-height: 0;
+}
+
 .shake {
     animation-name: shake-animation;
     animation-duration: 1s;
 }
 
-.canvasContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.playerContainer {
+    margin: auto;
+    flex: 0;
 }
 
-body, #pongCanvas {
-    background-color: black;
-}
-
-.player {
-    position: fixed;
-    top: 50%;
-    color: white;
-    margin-top: -100px;
-}
-
-.player img {
-    width: 200px;
-    height: 200px;
-}
-
-@media only screen and (max-width: 1600px) {
-    .player {
-        margin-top: -50px;
-    }
-
-    .player img {
-        width: 100px;
-        height: 100px;
-    }
-}
-
-.human {
-    left: 2%;
-}
-
-.cpu {
-    margin-top: -100px;
-    margin-left: -200px;
-    left: 98%;
-}
-
-@media only screen and (max-width: 1600px) {
-    .cpu {
-        margin-top: -50px;
-        margin-left: -100px;
-    }
+img.player {
+    /* width: 10vw;
+    height: 10vw; */
+    width: 100px;
+    height: 100px;
 }
 
 .options {
-    position: fixed;
-    top: 98%;
-    left: 98%;
-    transform: translate(-100%, -100%);
+    display: flex;
+    flex: 0;
+    justify-content: space-around;
 }
 
 .options p {
@@ -94,9 +101,8 @@ body, #pongCanvas {
     color: white;
 }
 
-@media only screen and (max-width: 1600px) {
-    .options p {
-        width: 100px;
-        font-size: 10px;
+@media screen and (max-width: 1100px), screen and (max-height: 720px) {
+    .options, img.player {
+        display: none;
     }
 }

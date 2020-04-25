@@ -2,15 +2,26 @@
     <title>Pong</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 
 <body>
-    <div class="player human"><img src="human.jpg" alt="Player"></div>
-    <div class="player cpu"><img id="cpuface" src="cpu.jpg" alt="CPU"></div>
-    <div class="canvasContainer">
-        <canvas id="pongCanvas" width="800" height="600"></canvas>
+    <div class="allContainer">
+        <div class="container">
+            <div class="playerContainer"><img class="player human" src="human.jpg" alt="Player"></div>
+            <div class="canvasContainer">
+                <canvas id="pongCanvas"></canvas>
+            </div>
+            <div class="playerContainer"><img class="player cpu" id="cpuface" src="cpu.jpg" alt="CPU"></div>
+        </div>
+        
+        <div class="options">
+            <p>F = Toggle Faces</p>
+            <p>S = Toggle Sound</p>
+            <p>I = Toggle Instructions</p>
+            <p>A = Toggle Animations</p>
+        </div>
     </div>
-    <div class="options"><p>F = Toggle Faces</p><p>S = Toggle Sound</p><p>I = Toggle Instructions</p><p>A = Toggle Animations</p></div>
 </body>
 
 <script

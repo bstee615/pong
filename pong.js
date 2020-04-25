@@ -1,38 +1,63 @@
 let $canvas = $("#pongCanvas");
+
+$canvasContainer = $canvas.parent();
+
 let canvas = $canvas[0];
-// const aspectRatio = 4/3;
-// canvas.height = window.innerHeight - 30;
-// canvas.width = canvas.height * aspectRatio;
-let ctx = canvas.getContext("2d");
-ctx.fillStyle = "white";
-ctx.font = "60px Atari";
+let ctx;
+
 sounds = {
     wall: new Audio('wall.wav'),
     paddle: new Audio('paddle.wav'),
     point: new Audio('point.wav'),
 };
 
-const keys = {
-    up: false,
-    down: false
-};
-const padding = 50;
-const bounds = {
-    top: 0,
-    right: canvas.width,
-    bottom: canvas.height,
-    left: 0
-};
-const paddleWidth = 30;
-const paddleLength = paddleWidth * 4;
-const ballRadius = 30;
-const ballStart = {
-    x: canvas.width / 2 - ballRadius / 2,
-    y: canvas.height / 2 - ballRadius / 2
-};
-const ballSpeed = 10
-const paddleSpeed = ballSpeed * .65;
-let ball = {
+let padding;
+let bounds;
+let paddleWidth;
+let paddleLength;
+let ballRadius;
+let ballStart;
+let ballSpeed;
+let paddleSpeed;
+let ball;
+let player1;
+let player2;
+
+function resetCanvasWidth() {
+    const aspectRatio = 4/3;
+    if ($canvasContainer.width() / aspectRatio <= $canvasContainer.height()) {
+        canvas.width = $canvasContainer.width();
+        canvas.height = $canvasContainer.width() / aspectRatio;
+    }
+    else {
+        canvas.width = $canvasContainer.height() * aspectRatio;
+        canvas.height = $canvasContainer.height();
+    }
+    paddleLength = canvas.height / 4;
+    
+    padding = 50;
+    bounds = {
+        top: 0,
+        right: canvas.width,
+        bottom: canvas.height,
+        left: 0
+    };
+    paddleWidth = ballRadius = 30;
+    paddleLength = canvas.height / 6;
+    ballStart = {
+        x: canvas.width / 2 - ballRadius / 2,
+        y: canvas.height / 2 - ballRadius / 2
+    };
+    ballSpeed = 10
+    paddleSpeed = ballSpeed * .65;
+    
+    ctx = canvas.getContext("2d");
+    ctx.fillStyle = "white";
+    ctx.font = "60px Atari";
+}
+resetCanvasWidth();
+
+ball = {
     x: ballStart.x,
     y: ballStart.y,
     r: ballRadius,
@@ -41,19 +66,42 @@ let ball = {
         y: ballSpeed/2
     }
 };
-let player1 = {
+player1 = {
     x: bounds.left + padding - paddleWidth,
     y: canvas.height / 2 - paddleLength / 2,
     w: paddleWidth,
     h: paddleLength,
     delta: paddleSpeed
 };
-let player2 = {
+player2 = {
     x: bounds.right - padding,
     y: canvas.height / 2 - paddleLength / 2,
     w: paddleWidth,
     h: paddleLength,
     delta: paddleSpeed
+};
+
+function resizeGameState() {
+    resetCanvasWidth();
+
+    correctBall();
+    correctPaddle(player1);
+    correctPaddle(player2);
+
+    player1.x = bounds.left + padding - paddleWidth;
+    player2.x = bounds.right - padding;
+    player1.w = paddleWidth;
+    player1.h = paddleLength;
+    player2.w = paddleWidth;
+    player2.h = paddleLength;
+}
+
+$(window).resize(resizeGameState);
+resizeGameState();
+
+var keys = {
+    up: false,
+    down: false
 };
 let points = {
     player1: 0,
@@ -71,6 +119,7 @@ $(document).keydown(function (ev) {
     }
     if (ev.key == "f") {
         $(".player").toggle();
+        resizeGameState();
     }
     if (ev.key == "s") {
         sound = !sound;
@@ -259,12 +308,12 @@ function drawElements() {
 }
 
 function drawDashedLine() {
-    const numDashes = 30;
-    const dashLength = canvas.height / numDashes;
     const dashWidth = ball.r / 2;
     const dashedLineX = canvas.width / 2 - dashWidth / 2;
-    for (let y = dashLength / 2; y < canvas.height; y += dashLength) {
-        ctx.fillRect(dashedLineX, y, dashWidth, ball.r / 2);
+    const numDashes = 10;
+    const spaceBetween = (canvas.height + dashWidth) / numDashes;
+    for (let y = dashWidth / 2; y < canvas.height; y += spaceBetween) {
+        ctx.fillRect(dashedLineX, y, dashWidth, dashWidth);
     }
 }
 
@@ -298,9 +347,11 @@ function render() {
 }
 
 function loop() {
-    update();
     render();
+
+    window.requestAnimationFrame(loop);
 }
 
 resetBall();
-setInterval(loop, 10);
+loop();
+setInterval(update, 10);
