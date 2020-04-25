@@ -1,7 +1,9 @@
-var canvas = $("#pongCanvas")[0];
-canvas.height = window.innerHeight - 30;
-canvas.width = canvas.height * 800 / 600;
-var ctx = canvas.getContext("2d");
+let $canvas = $("#pongCanvas");
+let canvas = $canvas[0];
+// const aspectRatio = 4/3;
+// canvas.height = window.innerHeight - 30;
+// canvas.width = canvas.height * aspectRatio;
+let ctx = canvas.getContext("2d");
 ctx.fillStyle = "white";
 ctx.font = "60px Atari";
 sounds = {
@@ -10,7 +12,7 @@ sounds = {
     point: new Audio('point.wav'),
 };
 
-var keys = {
+const keys = {
     up: false,
     down: false
 };
@@ -30,7 +32,7 @@ const ballStart = {
 };
 const ballSpeed = 10
 const paddleSpeed = ballSpeed * .65;
-var ball = {
+let ball = {
     x: ballStart.x,
     y: ballStart.y,
     r: ballRadius,
@@ -39,26 +41,26 @@ var ball = {
         y: ballSpeed/2
     }
 };
-var player1 = {
+let player1 = {
     x: bounds.left + padding - paddleWidth,
     y: canvas.height / 2 - paddleLength / 2,
     w: paddleWidth,
     h: paddleLength,
     delta: paddleSpeed
 };
-var player2 = {
+let player2 = {
     x: bounds.right - padding,
     y: canvas.height / 2 - paddleLength / 2,
     w: paddleWidth,
     h: paddleLength,
     delta: paddleSpeed
 };
-var points = {
+let points = {
     player1: 0,
     player2: 0
 };
-var sound = true;
-var animatePoint = true;
+let sound = true;
+let animatePoint = true;
 
 $(document).keydown(function (ev) {
     if (ev.key == "ArrowUp") {
@@ -219,7 +221,7 @@ function correctPaddle(paddle) {
 }
 
 function updatePlayer() {
-    var deltaY = 0;
+    let deltaY = 0;
     if (keys.up) {
         deltaY -= player1.delta;
     }
