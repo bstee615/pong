@@ -154,7 +154,8 @@ function resetBall() {
     ball.y = ballStart.y;
     // const signRand = Math.random() - .5;
     // const sign = signRand / Math.abs(signRand);
-    const magnitude = (randomG(5) - .5) * 10;
+    // const magnitude = (randomG(5) - .5) * 10;
+    const magnitude = 0;
     ball.delta.y = magnitude;
 
     if (sound) {
