@@ -123,18 +123,56 @@ function registerEventHandlers() {
         // $(document).off('keydown.ponk');
         // $(document).off('keyup.ponk');
         
-        $('#phone-up').on('touchstart.ponk mousedown.ponk', function (ev) {
-            keys.up = true;
+        const phoneUp = $('.phone-control.up');
+        const phoneDown = $('.phone-control.down');
+
+        let $realTarget = null;
+        function updateKeys(el) {
+            const $el = $(el);
+            if ($realTarget && !$realTarget.is(el)) {
+                keys.up = false;
+                keys.down = false;
+                $realTarget = $(el);
+            }
+
+            if ($el.is(phoneUp)) {
+                keys.up = true;
+            }
+            else {
+                keys.up = false;
+            }
+
+            if ($el.is(phoneDown)) {
+                keys.down = true;
+            }
+            else {
+                keys.down = false;
+            }
+        }
+
+        $(document).on('touchstart', function(ev) {
+            updateKeys(ev.target);
         });
-        $('#phone-up').on('touchend.ponk mouseup.ponk', function (ev) {
+        $(document).on('touchend', function(ev) {
             keys.up = false;
-        });
-        $('#phone-down').on('touchstart.ponk mousedown.ponk', function (ev) {
-            keys.down = true;
-        });
-        $('#phone-down').on('touchend.ponk mouseup.ponk', function (ev) {
             keys.down = false;
         });
+        $(document).on('touchmove', function(ev) {
+            const realTarget = document.elementFromPoint(ev.targetTouches[0].pageX, ev.targetTouches[0].pageY);
+            updateKeys(realTarget);
+        });
+        // phoneUp.on('touchenter', function(ev) {
+        //     updateKeys(ev.target);
+        // });
+        // phoneUp.on('touchleave', function(ev) {
+        //     updateKeysNegative(ev.target);
+        // });
+        // phoneDown.on('touchenter', function(ev) {
+        //     updateKeys(ev.target);
+        // });
+        // phoneDown.on('touchleave', function(ev) {
+        //     updateKeysNegative(ev.target);
+        // });
     }
     else {
         $('.phone-controls').hide();
