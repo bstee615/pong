@@ -160,6 +160,9 @@ function registerEventHandlers() {
         $(document).on('touchmove', function(ev) {
             const realTarget = document.elementFromPoint(ev.targetTouches[0].pageX, ev.targetTouches[0].pageY);
             updateKeys(realTarget);
+            if ($(ev.target).is(phoneUp) || $(ev.target).is(phoneDown)) {
+                e.preventDefault();
+            }
         });
         // phoneUp.on('touchenter', function(ev) {
         //     updateKeys(ev.target);
